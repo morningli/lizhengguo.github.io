@@ -7,8 +7,8 @@
 
 假设现在有两个Redis服务器，地址分别为127.0.0.1:6379和127.0.0.1:12345，如果我们向服务器127.0.0.1:12345发送以下命令：
 
-127.0.0.1:12345> SLAVEOF 127.0.0.1 6379
-OK
+	127.0.0.1:12345> SLAVEOF 127.0.0.1 6379
+	OK
 
 那么服务器127.0.0.1:12345将成为127.0.0.1:6379的从服务器，而服务器127.0.0.1:6379则会成为127.0.0.1:12345的主服务器。
 
@@ -174,14 +174,14 @@ OK
 
 从服务器首先要做的就是将客户端给定的主服务器IP地址127.0.0.1以及端口6379保存到服务器状态的masterhost属性和masterport属性里面：
 
-struct redisServer {
-    // ...
-    // 主服务器的地址
-    char *masterhost;
-    // 主服务器的端口
-    int masterport;
-    // ...
-};
+	struct redisServer {
+	    // ...
+	    // 主服务器的地址
+	    char *masterhost;
+	    // 主服务器的端口
+	    int masterport;
+	    // ...
+	};
 
 SLAVEOF命令是一个异步命令，在完成masterhost属性和masterport属性的设置工作之后，从服务器将向发送SLAVEOF命令的客户端返回OK，表示复制指令已经被接收，而实际的复制工作将在OK返回之后才真正开始执行。
 
@@ -212,11 +212,12 @@ SLAVEOF命令是一个异步命令，在完成masterhost属性和masterport属�
 
 ![](https://images0.cnblogs.com/blog2015/754165/201508/111558463326839.png)
 
-步骤4：身份验证
+### 步骤4：身份验证
 
 从服务器在收到主服务器返回的"PONG"回复之后，下一步要做的就是决定是否进行身份验证：
 
-如果从服务器设置了masterauth选项，那么进行身份验证。否则不进行身份认证；
+- 如果从服务器设置了masterauth选项，那么进行身份验证。否则不进行身份认证；
+
 在需要进行身份验证的情况下，从服务器将向主服务器发送一条AUTH命令，命令的参数为从服务器masterauth选项的值。
 
 从服务器在身份验证阶段可能遇到的情况有以下几种：
@@ -224,3 +225,87 @@ SLAVEOF命令是一个异步命令，在完成masterhost属性和masterport属�
 - 主服务器没有设置requirepass选项，从服务器没有设置masterauth,那么就继续后面的复制工作；
 - 如果从服务器的通过AUTH命令发送的密码和主服务器requirepass选项所设置的密码相同，那么也继续后面的工作，否则返回错误invaild password;
 - 如果主服务器设置了requireoass选项，但从服务器没有设置masterauth选项，那么服务器将返回NOAUTH错误。反过来如果主服务器没有设置requirepass选项，但是从服务器却设置了materauth选项，那么主服务器返回no password is set错误；
+
+
+所有错误到只有一个结果：中止目前的复制工作，并从创建套接字开始重新执行复制，直到身份验证通过，或者从服务器放弃执行复制为止。
+
+![](https://images0.cnblogs.com/blog2015/754165/201508/111612480989940.png)
+
+### 步骤5：发送端口信息
+
+身份验证步骤之后，从服务器将执行命令REPLCONF listening-port <port-number>，向主服务器发送从服务器的监听端口号。
+
+主服务器在接收到这个命令之后，会将端口号记录在从服务器所对应的客户端状态的slave_listening_port属性中：
+
+	typedef struct redisClient {
+	    // ...
+	    // 从服务器的监听端口号
+	    int slave_listening_port;
+	    // ...
+	｝redisClient;
+
+slave_listening_port属性目前唯一的作用就是在主服务器执行INFO replication命令时打印出从服务器的端口号。
+
+### 步骤6：同步
+
+在这一步，从服务器将向主服务器发送PSYNC命令，执行同步操作，并将自己的数据库更新至主服务器数据库当前所处的状态。
+
+需要注意的是在执行同步操作前，只有从服务器是主服务器的客户端。但是执行从不操作之后，主服务器也会成为从服务器的客户端：
+
+- 如果PSYNC命令执行的是完整同步操作，那么主服务器只有成为了从服务器的客户端才能将保存在缓冲区中的写命令发送给从服务器执行；
+- 如果PSYNC命令执行的是部分同步操作，那么主服务器只有成为了从服务器的客户端才能将保存在复制积压缓冲区中的写命令发送给从服务器执行；
+
+### 步骤7：命令传播
+
+当完成了同步之后，主从服务器就会进入命令传播阶段，这时主服务器只要一直将自己执行的写命令发送给从服务器，而从服务器只要一直接收并执行主服务器发来的写命令，就可以保证主从服务器一直保持一致了。
+
+### 心跳检测
+
+在命令传播阶段，从服务器默认会以每秒一次的频率，向主服务器发送命令：REPLCONF ACK <replication_offset>
+
+其中replication_offset是从服务器当前的复制偏移量。
+
+发送REPLCONF ACK命令对于主从服务器有三个作用：
+
+- 检测主从服务器的网络连接状态；
+- 辅助实现min-slaves选项；
+- 检测命令丢失。
+
+### 检测主从服务器的网络连接状态
+
+如果主服务器超过一秒钟没有收到从服务器发来的REPLCONF ACK命令，那么主服务器就知道主从服务器之间的连接出现问题了。
+
+通过向主服务器发送INFO replication命令，在列出的从服务器列表的lag一栏中，我们可以看到相应从服务器最后一次向主服务器发送REPLCONF ACK命令距离现在过了多少秒：
+
+	127.0.0.1:6379> INFO replication
+	# Replication
+	role:master
+	connected_slaves:2
+	#刚刚发送过 REPLCONF ACK命令
+	slave0:ip=127.0.0.1,port=12345,state=online,offset=211,lag=0  
+	#15秒之前发送过REPLCONF ACK命令
+	slave1:ip=127.0.0.1,port=56789,state=online,offset=197,lag=15   
+
+	master_repl_offset:211
+	repl_backlog_active:1
+	repl_backlog_size:1048576
+	repl_backlog_first_byte_offset:2
+	repl_backlog_histlen:210
+
+在一般情况下，lag的值应该在0秒或者1秒之间跳动，如果超过1秒的话，那么说明主从服务器之间的连接出现了故障。
+
+### 辅助实现min-slaves配置选项
+
+Redis的min-slaves-to-write和min-slaves-max-lag两个选项可以防止主服务器在不安全的情况下执行写命令。
+
+举个例子，如果我们向主服务器提供以下设置：
+
+min-slaves-to-write 3
+min-slaves-max-lag 10
+
+那么在从服务器的数量少于3个，或者三个从服务器的延迟（lag）值都大于或等于10秒时，主服务器将拒绝执行写命令，这里的延迟值就是上面提到的INFO replication命令的lag值。
+
+### 检测命令丢失
+
+我们从命令：REPLCONF ACK <replication_offset>就可以知道，每发送一次这个命令从服务器都会向主服务器报告一次自己的复制偏移量。那此时尽管主服务器发送给从服务器的SET key value丢失了。也无所谓，主服务器马上就知道了。
+
