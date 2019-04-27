@@ -1,4 +1,5 @@
 # Redis主从复制机制
+[原文链接](https://www.cnblogs.com/lukexwang/p/4711977.html)
 ## 旧版复制功能的实现
 Redis的复制功能分为同步（sync）和命令传播（command propagate）两个操作：
 
