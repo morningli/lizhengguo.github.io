@@ -41,7 +41,7 @@
 	- gorm
 - hook机制(Before/After Create/Save/Update/Delete/Find)
 对象关系Has One, Has Many, Belongs To, Many To Many, Polymorphism
-- 热加载
+- 热加载(没找到相关资料，也许说的是预加载)
 - 支持原生sql操作
 - 事务性
 - 链式api
