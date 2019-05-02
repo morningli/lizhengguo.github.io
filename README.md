@@ -19,6 +19,12 @@
 ### MongoDB
 
 - [MongoDB官方推出的Go驱动库“mongo-go-driver”快速教程(2019-04-30)](MongoDB的Go驱动库.md)
+- [mgo官方文档(2019-04-30)](https://godoc.org/gopkg.in/mgo.v2)
+
+### mysql
+- [各主流的golang orm介绍(2019-05-02)](各主流的golangorm介绍.md)
+- [GORM 中文文档(2019-05-02)](http://gorm.book.jasperxu.com/)
+
 
 ## 工作流引擎
 
