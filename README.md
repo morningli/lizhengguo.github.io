@@ -1,5 +1,7 @@
 # 学习笔记
 
+[首页](https://morningli.github.io/lizhengguo.github.io/)
+
 ## 操作系统
 
 ### linux进程管理
