@@ -2,7 +2,19 @@
 
 [首页](https://morningli.github.io/lizhengguo.github.io/)
 
+## 语言
+
+### c++
+
+- 多态实现方式
+
+### golang
+
+- 内存回收机制
+
 ## 网络
+
+- connect失败情况
 
 ## 操作系统
 
@@ -11,9 +23,19 @@
 - [fork()和写时复制](fork和写时复制.md)
 - [fork函数中的内存复制和共享(2019-04-27)](fork函数中的内存复制和共享.md)
 
+### 内核
+
+- BSD系统
+- GNU系统
+
 ### 硬盘
 
+- [linux下write操作原理、错误原因及处理方法](linux下write操作原理错误原因及处理方法.md)
+- 虚拟文件系统
+
 ### 内存
+
+- malloc流程
 
 ## 数据库
 
@@ -43,6 +65,25 @@
 - MVCC
 - 故障恢复
 - 锁机制
+
+## 分布式一致性算法
+
+### 2PC
+
+### 3PC
+
+### TTC
+
+### Paxos
+
+- [分布式系统理论进阶 - Paxos变种和优化](http://www.cnblogs.com/bangerlee/p/6189646.html)
+
+### Raft
+
+### Zookeeper
+
+- [Paxos-->Fast Paxos-->Zookeeper分析](https://blog.csdn.net/u010039929/article/details/70171672)
+- [Paxos算法与Zookeeper分析](https://blog.csdn.net/xhh198781/article/details/10949697)
 
 ## 工作流引擎
 
