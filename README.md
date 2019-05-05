@@ -85,8 +85,19 @@
 - [Paxos-->Fast Paxos-->Zookeeper分析](https://blog.csdn.net/u010039929/article/details/70171672)
 - [Paxos算法与Zookeeper分析](https://blog.csdn.net/xhh198781/article/details/10949697)
 
-## 工作流引擎
+## 设计模式
 
-### golang
+- [10种常见的软件架构模式](10种常见的软件架构模式.md)
+- [从事件总线和消息队列说起](https://www.cnblogs.com/Jusfr/p/5256791.html)
+- [理解主从设备模式(Master-Slave)](https://www.cnblogs.com/dmego/p/9068734.html)
+- [软件架构之黑板模式 ](https://www.cnblogs.com/xuemo/p/9086105.html)
+
+## 中间件
+
+### Flow （工作流引擎）
 
 - [Flow文档工作流库(2019-04-29)](Flow文档工作流库.md)
+- [active文档](http://www.mossle.com/docs/activiti/index.html#license)
+- JBPM
+
+### BPM （业务流程管理）
