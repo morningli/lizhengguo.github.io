@@ -78,6 +78,7 @@
 
 ### Paxos
 
+- 拜占庭将军问题
 - [分布式系统理论进阶 - Paxos变种和优化](http://www.cnblogs.com/bangerlee/p/6189646.html)
 
 ### Raft
@@ -123,5 +124,4 @@
 
 - [Nomad](http://github.com/hashicorp/nomad)
 - [ETCD 简介 + 使用](ETCD简介使用.md)
-- [ETCD相关介绍--整体概念及原理方面](ETCD整体概念及原理方面.md)
 - [ZooKeeper典型使用场景一览](ZooKeeper典型使用场景一览.md)
