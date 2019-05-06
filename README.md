@@ -43,6 +43,8 @@
 
 - [Redis主从复制(2019-04-27)](Redis主从复制.md)
 - [Redis RDB持久化(2019-04-27)](RedisRDB持久化.md)
+- [内存回收机制](内存回收机制.md)
+- 
 - 数据结构实现方式
 - 事务
 - 集群方案
@@ -92,12 +94,34 @@
 - [理解主从设备模式(Master-Slave)](https://www.cnblogs.com/dmego/p/9068734.html)
 - [软件架构之黑板模式 ](https://www.cnblogs.com/xuemo/p/9086105.html)
 
+## 算法
+
+- [缓存淘汰算法之LFU](https://www.cnblogs.com/qingdaofu/p/7459248.html)
+
 ## 中间件
+
+- [Golang优秀开源项目汇总](https://studygolang.com/articles/7708)
 
 ### Flow （工作流引擎）
 
 - [Flow文档工作流库(2019-04-29)](Flow文档工作流库.md)
 - [active文档](http://www.mossle.com/docs/activiti/index.html#license)
 - JBPM
+- openflow
 
 ### BPM （业务流程管理）
+
+### 任务调度
+
+- [分布式调度框架大集合](https://blog.csdn.net/u012379844/article/details/82716146)
+- [分布式任务系统cronsun](https://blog.csdn.net/ra681t58cjxsgckj31/article/details/78851749)
+- [Azkaban 简介](https://www.cnblogs.com/shujuxiong/p/9116394.html)
+- Oozie
+- [Qor](https://getqor.com/cn)
+
+### 分布式调度
+
+- [Nomad](http://github.com/hashicorp/nomad)
+- [ETCD 简介 + 使用](ETCD简介使用.md)
+- [ETCD相关介绍--整体概念及原理方面](ETCD整体概念及原理方面.md)
+- [ZooKeeper典型使用场景一览](ZooKeeper典型使用场景一览.md)
