@@ -60,6 +60,8 @@
 
 - [MongoDB官方推出的Go驱动库“mongo-go-driver”快速教程(2019-04-30)](MongoDB的Go驱动库.md)
 - [mgo官方文档(2019-04-30)](https://godoc.org/gopkg.in/mgo.v2)
+- [MongoDB 之使用故障转移的分布式任务分配](MongoDB之使用故障转移的分布式任务分配.md)
+- [【Mongodb】_id和ObjectId详解！](https://blog.csdn.net/after_you/article/details/66971680)
 
 ### mysql
 
@@ -125,3 +127,4 @@
 - [Nomad](http://github.com/hashicorp/nomad)
 - [ETCD 简介 + 使用](ETCD简介使用.md)
 - [ZooKeeper典型使用场景一览](ZooKeeper典型使用场景一览.md)
+- [分布式id解决方案](https://blog.csdn.net/u013332124/article/details/81234125)

@@ -245,6 +245,7 @@ etcd有三种集群化启动的配置方案，分别为静态配置启动、etcd
 	  -initial-cluster infra0=http://10.0.1.10:2380,infra1=http://10.0.1.11:2380,infra2=http://10.0.1.12:2380 \
 	  -initial-cluster-state new
 
+
 在初始化完成后，etcd还提供动态增、删、改etcd集群节点的功能，这个需要用到etcdctl命令进行操作。
 
 #### 4.1.2. etcd自发现模式
