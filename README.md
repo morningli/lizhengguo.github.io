@@ -11,10 +11,12 @@
 ### golang
 
 - 内存回收机制
+- [vim-go](vimgo.md)
 
 ## 网络
 
 - connect失败情况
+- [IP](https://blog.csdn.net/slx765633632/article/details/82261755)
 
 ## 操作系统
 
@@ -27,6 +29,10 @@
 
 - BSD系统
 - GNU系统
+
+### 应用
+
+- 系统网络参数
 
 ### 硬盘
 
@@ -126,5 +132,16 @@
 
 - [Nomad](http://github.com/hashicorp/nomad)
 - [ETCD 简介 + 使用](ETCD简介使用.md)
+- [ETCD源码](https://github.com/etcd-io/etcd)
+- [ETCD使用](https://www.jianshu.com/p/2c1f56814ea5)
+- [ETCD常见问题汇总](https://blog.csdn.net/qq_35440678/article/details/80425896)
+- [ETCD命令大全](http://orchome.com/620)
+- [etcd v3命令和API](https://blog.csdn.net/u010278923/article/details/71727682)
+- [etcd租约](https://www.jianshu.com/p/9bd1ab83b220)
 - [ZooKeeper典型使用场景一览](ZooKeeper典型使用场景一览.md)
 - [分布式id解决方案](https://blog.csdn.net/u013332124/article/details/81234125)
+
+### docker
+
+- [docker快速入门](http://km.oa.com/articles/show/400837?kmref=search&from_page=1&no=10)
+- [Docker系列学习文章 - 专业化定制镜像dockerfile（六）](Docker系列学习文章专业化定制镜像dockerfile六.md)
