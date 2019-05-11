@@ -45,6 +45,8 @@
 
 - [Redis主从复制(2019-04-27)](Redis主从复制.md)
 - [Redis RDB持久化(2019-04-27)](RedisRDB持久化.md)
+- [内存回收机制](内存回收机制.md)
+- 
 - 数据结构实现方式
 - 事务
 - 集群方案
@@ -60,6 +62,8 @@
 
 - [MongoDB官方推出的Go驱动库“mongo-go-driver”快速教程(2019-04-30)](MongoDB的Go驱动库.md)
 - [mgo官方文档(2019-04-30)](https://godoc.org/gopkg.in/mgo.v2)
+- [MongoDB 之使用故障转移的分布式任务分配](MongoDB之使用故障转移的分布式任务分配.md)
+- [【Mongodb】_id和ObjectId详解！](https://blog.csdn.net/after_you/article/details/66971680)
 
 ### mysql
 
@@ -78,6 +82,7 @@
 
 ### Paxos
 
+- 拜占庭将军问题
 - [分布式系统理论进阶 - Paxos变种和优化](http://www.cnblogs.com/bangerlee/p/6189646.html)
 
 ### Raft
@@ -87,7 +92,7 @@
 - [Paxos-->Fast Paxos-->Zookeeper分析](https://blog.csdn.net/u010039929/article/details/70171672)
 - [Paxos算法与Zookeeper分析](https://blog.csdn.net/xhh198781/article/details/10949697)
 
-## 工作流引擎
+## 设计模式
 
 - [分布式调度框架大集合](https://blog.csdn.net/u012379844/article/details/82716146)
 - [Flow文档工作流库(2019-04-29)](Flow文档工作流库.md)
@@ -95,3 +100,39 @@
 ## 其他
 
 - [四大开源协议比较:BSD、Apache、GPL、LGPL](https://www.cnblogs.com/top5/archive/2010/07/31/1789657.html)
+- [10种常见的软件架构模式](10种常见的软件架构模式.md)
+- [从事件总线和消息队列说起](https://www.cnblogs.com/Jusfr/p/5256791.html)
+- [理解主从设备模式(Master-Slave)](https://www.cnblogs.com/dmego/p/9068734.html)
+- [软件架构之黑板模式 ](https://www.cnblogs.com/xuemo/p/9086105.html)
+
+## 算法
+
+- [缓存淘汰算法之LFU](https://www.cnblogs.com/qingdaofu/p/7459248.html)
+
+## 中间件
+
+- [Golang优秀开源项目汇总](https://studygolang.com/articles/7708)
+
+### Flow （工作流引擎）
+
+- [Flow文档工作流库(2019-04-29)](Flow文档工作流库.md)
+- [active文档](http://www.mossle.com/docs/activiti/index.html#license)
+- JBPM
+- openflow
+
+### BPM （业务流程管理）
+
+### 任务调度
+
+- [分布式调度框架大集合](https://blog.csdn.net/u012379844/article/details/82716146)
+- [分布式任务系统cronsun](https://blog.csdn.net/ra681t58cjxsgckj31/article/details/78851749)
+- [Azkaban 简介](https://www.cnblogs.com/shujuxiong/p/9116394.html)
+- Oozie
+- [Qor](https://getqor.com/cn)
+
+### 分布式调度
+
+- [Nomad](http://github.com/hashicorp/nomad)
+- [ETCD 简介 + 使用](ETCD简介使用.md)
+- [ZooKeeper典型使用场景一览](ZooKeeper典型使用场景一览.md)
+- [分布式id解决方案](https://blog.csdn.net/u013332124/article/details/81234125)
