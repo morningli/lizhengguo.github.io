@@ -27,8 +27,7 @@
 
 ### 内核
 
-- BSD系统
-- GNU系统
+- [UNIX发展史(BSD,GNU,linux)](https://www.cnblogs.com/Dodge/articles/4264833.html)
 
 ### 应用
 
@@ -38,6 +37,9 @@
 
 - [linux下write操作原理、错误原因及处理方法](linux下write操作原理错误原因及处理方法.md)
 - 虚拟文件系统
+- [聊聊Linux IO（上）](https://cloud.tencent.com/developer/article/1346483)
+- [聊聊Linux IO（中）](https://cloud.tencent.com/developer/article/1346484)
+- [聊聊Linux IO（下）](https://cloud.tencent.com/developer/article/1346485)
 
 ### 内存
 
@@ -98,6 +100,12 @@
 
 ## 设计模式
 
+- [分布式调度框架大集合](https://blog.csdn.net/u012379844/article/details/82716146)
+- [Flow文档工作流库(2019-04-29)](Flow文档工作流库.md)
+
+## 其他
+
+- [四大开源协议比较:BSD、Apache、GPL、LGPL](https://www.cnblogs.com/top5/archive/2010/07/31/1789657.html)
 - [10种常见的软件架构模式](10种常见的软件架构模式.md)
 - [从事件总线和消息队列说起](https://www.cnblogs.com/Jusfr/p/5256791.html)
 - [理解主从设备模式(Master-Slave)](https://www.cnblogs.com/dmego/p/9068734.html)
