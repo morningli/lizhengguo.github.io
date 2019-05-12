@@ -125,9 +125,9 @@
 - JBPM
 - openflow
 - cronsun etcd使用方式
-- saturn、TBSchedule分片规则
+- saturn、**TBSchedule**分片规则
 - spring
-- quartz
+- **quartz**
 - Saturn 使用
 
 ### BPM （业务流程管理）
@@ -152,6 +152,9 @@
 - [etcd租约](https://www.jianshu.com/p/9bd1ab83b220)
 - [ZooKeeper典型使用场景一览](ZooKeeper典型使用场景一览.md)
 - [分布式id解决方案](https://blog.csdn.net/u013332124/article/details/81234125)
+- hadoop
+- spark
+- quartz
 
 ### docker
 
