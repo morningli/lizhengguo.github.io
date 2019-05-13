@@ -69,6 +69,7 @@
 - [mgo官方文档(2019-04-30)](https://godoc.org/gopkg.in/mgo.v2)
 - [MongoDB 之使用故障转移的分布式任务分配](MongoDB之使用故障转移的分布式任务分配.md)
 - [【Mongodb】_id和ObjectId详解！](https://blog.csdn.net/after_you/article/details/66971680)
+- [mgo 的 session 与连接池](https://www.cnblogs.com/logo-fox/p/7016017.html)
 
 ### mysql
 
