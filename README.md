@@ -164,4 +164,4 @@
 
 ### 搜索
 
-- es
+- [Elasticsearch 有关权重的配置](Elasticsearch 有关权重的配置.md)
