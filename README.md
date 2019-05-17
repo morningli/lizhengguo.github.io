@@ -18,6 +18,10 @@
 - connect失败情况
 - [IP](https://blog.csdn.net/slx765633632/article/details/82261755)
 
+##协议
+
+- [Protobuf3语法详解](https://www.cnblogs.com/tohxyblog/p/8974763.html)
+
 ## 操作系统
 
 ### linux进程管理
@@ -164,4 +168,8 @@
 
 ### 搜索
 
-- [Elasticsearch 有关权重的配置](Elasticsearch 有关权重的配置.md)
+- [Elasticsearch 有关权重的配置](Elasticsearch有关权重的配置.md)
+
+### 价值观和方法论
+
+- [BAT管理者都在思考：为什么技术最牛的码农当不了首席架构师？](https://m.toutiaocdn.com/a6691552642247688707/?app=news_article_lite&is_hit_share_recommend=0&tt_from=copy_link&utm_source=copy_link&utm_medium=toutiao_ios&utm_campaign=client_share)
