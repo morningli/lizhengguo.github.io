@@ -1,6 +1,5 @@
-# 学习笔记
+# [学习笔记](https://morningli.github.io/lizhengguo.github.io/)
 
-- [首页](https://morningli.github.io/lizhengguo.github.io/)
 - [语言](语言.md)
 - [操作系统](操作系统.md)
 - [网络](网络.md)
