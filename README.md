@@ -1,6 +1,8 @@
 # [学习笔记](https://morningli.github.io/lizhengguo.github.io/)
 
 - [语言](语言.md)
+- [数据结构](数据结构.md)
+- [算法](算法.md)
 - [操作系统](操作系统.md)
 - [网络](网络.md)
 - [数据库](存储.md)
