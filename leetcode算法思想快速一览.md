@@ -565,6 +565,8 @@ Example 2:
 
 最后要来的就是大名鼎鼎的马拉车算法 Manacher's Algorithm，这个算法的神奇之处在于将时间复杂度提升到了 O(n) 这种逆天的地步，而算法本身也设计的很巧妙，很值得我们掌握，参见我另一篇专门介绍马拉车算法的博客 [Manacher's Algorithm 马拉车算法](http://www.cnblogs.com/grandyang/p/4475985.html)，代码实现如下：
 
+![](https://images2018.cnblogs.com/blog/1414940/201808/1414940-20180801000600386-448004483.jpg)
+
 ### 解法四：
 
 	class Solution {
