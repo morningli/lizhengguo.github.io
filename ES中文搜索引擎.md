@@ -207,6 +207,12 @@
 
 ## 问题分析
 
+### 搜索
+
+1. 使用拼音无法获得高亮位置
+
+### 联想词
+
 1. 使用_all搜索联想词没法查到所有的匹配项
 
 		POST /reader_idx_*/_search
@@ -221,11 +227,77 @@
 		  "suggest": {"my-suggest":{"prefix":"小","completion":{"field":"title.suggest"}}}
 		}
 
-![](https://i.imgur.com/ZD1aDUK.png)
+	![](https://i.imgur.com/ZD1aDUK.png)
 
 		POST /reader_idx_book/_search
 		{
 		  "suggest": {"my-suggest":{"prefix":"小小","completion":{"field":"title.suggest"}}}
 		}
 
-![](https://i.imgur.com/nEeoIEW.png)
+	![](https://i.imgur.com/nEeoIEW.png)
+
+3. 使用fuzzy关联到莫名其妙的结果
+	
+		GET reader_idx_*/_search
+		{
+		  "_source": "false", 
+		  "suggest": {
+		    "topics_suggest": {
+		      "completion": {
+		        "field": "title.suggest",
+		        "fuzzy":{"fuzziness":2}
+		      },
+		      "prefix": "小"
+		    }
+		  }
+		}
+
+	![](https://i.imgur.com/EOBT59t.png)
+
+		GET reader_idx_*/_search
+		{
+		  "_source": "false", 
+		  "suggest": {
+		    "topics_suggest": {
+		      "completion": {
+		        "field": "title.suggest",
+		        "fuzzy":{"fuzziness":2}
+		      },
+		      "prefix": "小小"
+		    }
+		  }
+		}
+
+	![](https://i.imgur.com/fTBiLeE.png)
+
+		GET reader_idx_*/_search
+		{
+		  "_source": "false", 
+		  "suggest": {
+		    "topics_suggest": {
+		      "completion": {
+		        "field": "title.suggest",
+		        "fuzzy":true
+		      },
+		      "prefix": "小"
+		    }
+		  }
+		}
+
+	![](https://i.imgur.com/fwhGqyl.png)
+
+		GET reader_idx_*/_search
+		{
+		  "_source": "false", 
+		  "suggest": {
+		    "topics_suggest": {
+		      "completion": {
+		        "field": "title.suggest",
+		        "fuzzy":true
+		      },
+		      "prefix": "小小"
+		    }
+		  }
+		}
+
+	![](https://i.imgur.com/8vPac8T.png)
