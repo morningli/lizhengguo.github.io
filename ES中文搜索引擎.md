@@ -155,16 +155,7 @@
 	  },
 	  "highlight": {
 	    "fields": {
-	      "title": {},
-	      "title.pinyin": {},
-	      "author_name_text": {},
-	      "author_name_text.pinyin": {},
-	      "category_slave.keyword": {},
-	      "category3.keyword": {},
-	      "category_master.keyword": {},
-	      "info": {},
-	      "info.pinyin": {},
-	      "tag": {}
+	      "*": {}
 	    }
 	  }
 	}
