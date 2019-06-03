@@ -58,7 +58,8 @@
 	                },
 	                "suggest": {
 	                  "type": "completion",
-	                  "analyzer": "ik_max_word"
+	                  "analyzer": "ik_max_word",
+	                  "search_analyzer": "ik_smart"
 	                }
 	              }
 	            }
@@ -266,6 +267,22 @@
 		}
 
 	![](https://i.imgur.com/nEeoIEW.png)
+
+	解决：解决：suggest数量限制，可控，加上size字段即可
+
+		GET reader_idx_*/_search
+		{
+		  "_source": "false",
+		  "suggest": {
+		    "topics_suggest": {
+		      "completion": {
+		        "field": "title.suggest",
+		        "size": 10
+		      },
+		      "prefix": "小"
+		    }
+		  }
+		}
 
 3. 使用fuzzy关联到莫名其妙的结果
 	
