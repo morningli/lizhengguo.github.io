@@ -12,21 +12,24 @@
 	    "analysis": {
 	      "analyzer": {
 	        "pinyin_analyzer": {
-	          "tokenizer": "my_pinyin"
+	          "tokenizer": "ik_max_word",
+	          "filter": [
+	            "pinyin_filter",
+	            "word_delimiter"
+	          ]
 	        }
 	      },
-	      "tokenizer": {
-	        "my_pinyin": {
+	      "filter": {
+	        "pinyin_filter": {
 	          "type": "pinyin",
 	          "keep_first_letter": false,
 	          "keep_separate_first_letter": false,
 	          "keep_full_pinyin": true,
 	          "keep_joined_full_pinyin": true,
-	          "keep_original": true,
+	          "keep_original": false,
 	          "limit_first_letter_length": 16,
 	          "lowercase": true,
-	          "remove_duplicated_term": true,
-	          "ignore_pinyin_offset": false
+	          "remove_duplicated_term": true
 	        }
 	      }
 	    },
@@ -68,7 +71,7 @@
 	            "mapping": {
 	              "type": "text",
 	              "analyzer": "ik_max_word",
-				  "search_analyzer": "ik_smart",
+	              "search_analyzer": "ik_smart",
 	              "fields": {
 	                "pinyin": {
 	                  "type": "text",
@@ -85,7 +88,7 @@
 	            "mapping": {
 	              "type": "text",
 	              "analyzer": "ik_max_word",
-				  "search_analyzer": "ik_smart",
+	              "search_analyzer": "ik_smart",
 	              "fields": {
 	                "keyword": {
 	                  "ignore_above": 256,
@@ -203,6 +206,41 @@
 ### 搜索
 
 1. 使用拼音无法获得高亮位置
+
+	描述：
+
+
+
+	参考：
+
+	[Day 2 - ES 6.x拼音分词高亮爬坑记](https://elasticsearch.cn/article/6166)
+
+	解决：因为pinyin bug导致无法获取高亮位置，仅使用pinyin作为filter可以解决。文章推荐的使用ngram作为分词器索引和查询的性能极差，这里改成了使用ik作为分词器。
+	
+	    "analysis": {
+	      "analyzer": {
+	        "pinyin_analyzer": {
+	          "tokenizer": "ik_max_word",
+	          "filter": [
+	            "pinyin_filter",
+	            "word_delimiter"
+	          ]
+	        }
+	      },
+	      "filter": {
+	        "pinyin_filter": {
+	          "type": "pinyin",
+	          "keep_first_letter": false,
+	          "keep_separate_first_letter": false,
+	          "keep_full_pinyin": true,
+	          "keep_joined_full_pinyin": true,
+	          "keep_original": false,
+	          "limit_first_letter_length": 16,
+	          "lowercase": true,
+	          "remove_duplicated_term": true
+	        }
+	      }
+	    },
 
 ### 联想词
 
