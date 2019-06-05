@@ -17,6 +17,13 @@
 	            "pinyin_filter",
 	            "word_delimiter"
 	          ]
+	        },
+	        "pinyin_analyzer_smart": {
+	          "tokenizer": "ik_smart",
+	          "filter": [
+	            "pinyin_filter",
+	            "word_delimiter"
+	          ]
 	        }
 	      },
 	      "filter": {
@@ -54,7 +61,8 @@
 	                },
 	                "pinyin": {
 	                  "type": "text",
-	                  "analyzer": "pinyin_analyzer"
+	                  "analyzer": "pinyin_analyzer",
+	                  "search_analyzer": "pinyin_analyzer_smart"
 	                },
 	                "suggest": {
 	                  "type": "completion",
@@ -76,7 +84,9 @@
 	              "fields": {
 	                "pinyin": {
 	                  "type": "text",
-	                  "analyzer": "pinyin_analyzer"
+	                  "analyzer": "pinyin_analyzer",
+	                  "search_analyzer": "pinyin_analyzer_smart"
+	                  
 	                }
 	              }
 	            }
@@ -97,7 +107,8 @@
 	                },
 	                "pinyin": {
 	                  "type": "text",
-	                  "analyzer": "pinyin_analyzer"
+	                  "analyzer": "pinyin_analyzer",
+	                  "search_analyzer": "pinyin_analyzer_smart"
 	                }
 	              }
 	            }
@@ -204,19 +215,15 @@
 
 ## 问题分析
 
-### 搜索
+### 1.使用拼音无法获得高亮位置
 
-1. 使用拼音无法获得高亮位置
+描述：
 
-	描述：
+![图片描述](resource/problem_highlight.png)
 
+参考：[Day 2 - ES 6.x拼音分词高亮爬坑记](https://elasticsearch.cn/article/6166)
 
-
-	参考：
-
-	[Day 2 - ES 6.x拼音分词高亮爬坑记](https://elasticsearch.cn/article/6166)
-
-	解决：因为pinyin bug导致无法获取高亮位置，仅使用pinyin作为filter可以解决。文章推荐的使用ngram作为分词器索引和查询的性能极差，这里改成了使用ik作为分词器。
+解决：因为pinyin bug导致无法获取高亮位置，仅使用pinyin作为filter可以解决。文章推荐的使用ngram作为分词器索引和查询的性能极差，这里改成了使用ik作为分词器。
 	
 	    "analysis": {
 	      "analyzer": {
@@ -243,109 +250,118 @@
 	      }
 	    },
 
-### 联想词
+# 2.使用complete suggestion查询reader_idx_*时无法得到所有结果
 
-1. 使用_all搜索联想词没法查到所有的匹配项
+描述:
 
-		POST /reader_idx_*/_search
-		{
-		  "suggest": {"my-suggest":{"prefix":"小","completion":{"field":"title.suggest"}}}
-		}
+	GET reader_idx_*/_search
+	{
+	  "_source": "false",
+	  "suggest": {
+	    "topics_suggest": {
+	      "completion": {
+	        "field": "title.suggest"
+	      },
+	      "prefix": "小"
+	    }
+	  }
+	}
 
-2. 单一索引上无法查到存在的项
+![图片描述](resource/problem_suggest1.png)
 
-		POST /reader_idx_book/_search
-		{
-		  "suggest": {"my-suggest":{"prefix":"小","completion":{"field":"title.suggest"}}}
-		}
+	GET reader_idx_book/_search
+	{
+	  "_source": "false",
+	  "suggest": {
+	    "topics_suggest": {
+	      "completion": {
+	        "field": "title.suggest"
+	      },
+	      "prefix": "小"
+	    }
+	  }
+	}
 
-	![](https://i.imgur.com/ZD1aDUK.png)
+![图片描述](resource/problem_suggest2.png)
 
-		POST /reader_idx_book/_search
-		{
-		  "suggest": {"my-suggest":{"prefix":"小小","completion":{"field":"title.suggest"}}}
-		}
+解决：suggest数量限制，可控，加上size字段即可
 
-	![](https://i.imgur.com/nEeoIEW.png)
+	GET reader_idx_*/_search
+	{
+	  "_source": "false",
+	  "suggest": {
+	    "topics_suggest": {
+	      "completion": {
+	        "field": "title.suggest",
+	        "size": 10
+	      },
+	      "prefix": "小"
+	    }
+	  }
+	}
 
-	解决：解决：suggest数量限制，可控，加上size字段即可
+# 3. 使用搜索查询联想词时查出不相关数据
+问题描述：
+```
+GET /reader_idx_*/_search
+{
+  "query": {
+    "function_score": {
+      "functions": [
+        {
+          "script_score": {
+            "script": {
+              "source": "_score * 1"
+            }
+          }
+        }
+      ],
+      "query": {
+        "bool": {
+          "filter": {
+            "term": {
+              "status": "1"
+            }
+          },
+          "must": {
+            "multi_match": {
+              "fields": [
+                "title^10",
+                "title.pinyin^1"
+              ],
+              "query": "黄泉",
+              "tie_breaker": 0,
+              "type": "best_fields"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+![图片描述](resource/problem_pinyin1.png)
 
-		GET reader_idx_*/_search
-		{
-		  "_source": "false",
-		  "suggest": {
-		    "topics_suggest": {
-		      "completion": {
-		        "field": "title.suggest",
-		        "size": 10
-		      },
-		      "prefix": "小"
-		    }
-		  }
-		}
+分析：输入会分别转换成中文分词和拼音分词在title及title.pinyin字段上进行分词，分词情况如下
 
-3. 使用fuzzy关联到莫名其妙的结果
-	
-		GET reader_idx_*/_search
-		{
-		  "_source": "false", 
-		  "suggest": {
-		    "topics_suggest": {
-		      "completion": {
-		        "field": "title.suggest",
-		        "fuzzy":{"fuzziness":2}
-		      },
-		      "prefix": "小"
-		    }
-		  }
-		}
+```
+GET /read_idx_category/_analyze
+{
+  "field": "title",
+  "text": "黄泉"
+}
+```
 
-	![](https://i.imgur.com/EOBT59t.png)
+![图片描述](resource/problem_pinyin2.png)
 
-		GET reader_idx_*/_search
-		{
-		  "_source": "false", 
-		  "suggest": {
-		    "topics_suggest": {
-		      "completion": {
-		        "field": "title.suggest",
-		        "fuzzy":{"fuzziness":2}
-		      },
-		      "prefix": "小小"
-		    }
-		  }
-		}
+```
+GET /read_idx_category/_analyze
+{
+  "field": "title.pinyin",
+  "text": "黄泉"
+}
+```
 
-	![](https://i.imgur.com/fTBiLeE.png)
+![图片描述](resource/problem_pinyin3.png)
 
-		GET reader_idx_*/_search
-		{
-		  "_source": "false", 
-		  "suggest": {
-		    "topics_suggest": {
-		      "completion": {
-		        "field": "title.suggest",
-		        "fuzzy":true
-		      },
-		      "prefix": "小"
-		    }
-		  }
-		}
-
-	![](https://i.imgur.com/fwhGqyl.png)
-
-		GET reader_idx_*/_search
-		{
-		  "_source": "false", 
-		  "suggest": {
-		    "topics_suggest": {
-		      "completion": {
-		        "field": "title.suggest",
-		        "fuzzy":true
-		      },
-		      "prefix": "小小"
-		    }
-		  }
-		}
-
-	![](https://i.imgur.com/8vPac8T.png)
+可以看到拼音分词的粒度更细，而且因为是拼音匹配，会匹配到同音字，显得搜索结果不大相关。拼音分词比中文分词更细的原因是中文分词建立索引使用了ik_max，搜索时分词使用ik_smart，拼音没有指定搜索分词器，直接使用了建立索引的更细的分词器。这里应该改成拼音搜索时采用更粗粒度的分词器。
