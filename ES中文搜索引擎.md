@@ -30,13 +30,8 @@
 	        "pinyin_filter": {
 	          "type": "pinyin",
 	          "keep_first_letter": false,
-	          "keep_separate_first_letter": false,
-	          "keep_full_pinyin": true,
-	          "keep_joined_full_pinyin": true,
-	          "keep_original": false,
-	          "limit_first_letter_length": 16,
-	          "lowercase": true,
-	          "remove_duplicated_term": true
+	          "keep_full_pinyin": false,
+	          "keep_joined_full_pinyin": true
 	        }
 	      }
 	    },
