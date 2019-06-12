@@ -360,3 +360,79 @@ GET /read_idx_category/_analyze
 ![图片描述](resource/problem_pinyin3.png)
 
 可以看到拼音分词的粒度更细，而且因为是拼音匹配，会匹配到同音字，显得搜索结果不大相关。拼音分词比中文分词更细的原因是中文分词建立索引使用了ik_max，搜索时分词使用ik_smart，拼音没有指定搜索分词器，直接使用了建立索引的更细的分词器。这里应该改成拼音搜索时采用更粗粒度的分词器。
+
+## 压测
+
+ES机器配置：16核64G内存200G硬盘，2节点
+索引shard：2
+压测时间：1min
+超时时间：100ms
+压测机：V8-16-200
+
+1. term in text
+	
+	|客户端数|QPS|成功率|average time cost|min cost|max time cost|ES CPU|
+	|---|
+	|200|4134|100%|48 ms|0 ms|248 ms|27.6%|
+	|300|4014|100%|74 ms|0 ms|345 ms|27.2%|
+	|350|3964|100%|88 ms|0 ms|449 ms|26.9%|
+	|400|3975|100%|100 ms|0 ms|521 ms|27.4%|
+
+2. term in text with pretty
+
+	|客户端数|QPS|成功率|average time cost|min cost|max time cost|ES CPU|
+	|---|
+	|200|3393|100%|59 ms|0 ms|909 ms|27.6%|
+	|300|3421|100%|87 ms|0 ms|827 ms|27.2%|
+	|350|3405|100%|103 ms|0 ms|937 ms|26.9%|
+	|400|3419|100%|117 ms|0 ms|1017 ms|27.4%|
+
+3. term in keyword
+
+	|客户端数|QPS|成功率|average time cost|min cost|max time cost|ES CPU|
+	|---|
+	|50|5057|100%|9 ms|0 ms|111 ms|24.1%|
+	|100|5834|100%|17 ms|0 ms|142 ms|24.5%|
+	|200|5478|100%|36 ms|0 ms|594 ms|23.2%|
+	|300|5305|100%|56 ms|0 ms|348 ms|22.9%|
+	|400|5263|100%|76 ms|0 ms|420 ms|37.6%|
+	|500|5245|98.7%|95 ms|0 ms|548 ms|34.8%|
+	|500|5245|98.7%|95 ms|0 ms|548 ms|%|
+
+4. multi match in text
+
+	|客户端数|QPS|成功率|average time cost|min cost|max time cost|ES CPU|
+	|---|
+	|50|4667|100%|10 ms|0 ms|171 ms|57.8%|
+	|100|4991|100%|20 ms|0 ms|162 ms|58.8%|
+	|200|4960|100%|40 ms|0 ms|247 ms|44.9%|
+	|300|5262|100%|57 ms|0 ms|328 ms|62.4%|
+	|400|5408|99.8%|73 ms|0 ms|363 ms|52.5%|
+	|500|5449|98.7%|91 ms|0 ms|1300 ms|57.8%|
+	|600|5233|98.7%|114 ms|0 ms|1694 ms|%|
+
+5. 100并发
+
+	|查询条件|QPS|成功率|average time cost|min cost|max time cost|
+	|---|
+	|短连接 term|4021|100%|24 ms|0 ms|332 ms|
+	|短连接 term with pretty|3864|100%|25 ms|0 ms|352 ms|
+	|短连接 multi match *1|2726|100%|36 ms|0 ms|430 ms|
+	|短连接 multi match *10|2438|100%|41 ms|0 ms|369 ms|
+	|长连接 multi match *1|2277|100%|44 ms|0 ms|469 ms|
+	|长连接 multi match *10|1804|100%|55 ms|0 ms|313 ms|
+	|长连接 multi match *10 + script|1379|100%|72 ms|0 ms|653 ms|
+	|长连接 multi match *10 + script + highlight*|574|100%|174 ms|0 ms|990 ms|
+	|长连接 multi match *10 + script + highlight[]|535|100%|187 ms|0 ms|1287 ms|
+	|长连接 multi match *10 + script + highlight[] limit20|225|100%|447 ms|0 ms|1554 ms|
+	|搜索API|288|100%|348 ms|0 ms|1035 ms|
+
+	分析：
+	
+	1. 使用pretty比不使用的性能下降3.9%
+	1. multi match 性能比 term性能下降32.2%
+	1. 使用长连接性能下降16.5%
+	1. 10个字段搜索比1个字段搜索性能下降20.8%
+	1. 使用脚本打分性能下降23.6%
+	1. 使用高亮性能下降58.4%
+	1. limit20比limit10性能下降57.9%
