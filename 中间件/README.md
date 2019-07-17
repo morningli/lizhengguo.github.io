@@ -46,17 +46,17 @@
 ## docker
 
 - [docker快速入门](http://km.oa.com/articles/show/400837?kmref=search&from_page=1&no=10)
-- [Docker系列学习文章 - 专业化定制镜像dockerfile（六）](Docker系列学习文章专业化定制镜像dockerfile六.md)
+- [Docker系列学习文章 - 专业化定制镜像dockerfile（六）](Docker/Docker系列学习文章专业化定制镜像dockerfile六.md)
 
 ## 搜索
 
 ### Elasticsearch
 
-- [Elasticsearch 有关权重的配置](Elasticsearch有关权重的配置.md)
+- [Elasticsearch 有关权重的配置](Elasticsearch/Elasticsearch有关权重的配置.md)
 - [Elasticsearch Suggester详解](https://elasticsearch.cn/article/142)
 - [Elasticsearch Suggester API(自动补全）](http://www.mamicode.com/info-detail-2434987.html)
-- [[Elasticsearch] 多字段搜索 (三) - multi_match查询和多数字段](https://blog.csdn.net/dm_vincent/article/details/41842691)
-- [ES中文搜索引擎](ES中文搜索引擎.md)
+- [Elasticsearch 多字段搜索 (三) - multi_match查询和多数字段](https://blog.csdn.net/dm_vincent/article/details/41842691)
+- [ES中文搜索引擎](Elasticsearch/ES中文搜索引擎.md)
 - [elk之拼音插件可选参数](https://blog.csdn.net/a1148233614/article/details/80280024)
 - [Elasticsearch搜索Suggest功能优化](https://www.jianshu.com/p/9e2c6a8e1b54)
 - [ES索引存储原理](https://blog.csdn.net/guoyuguang0/article/details/76769184)
