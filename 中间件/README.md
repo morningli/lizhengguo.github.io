@@ -30,13 +30,13 @@
 ## 分布式调度
 
 - [Nomad](http://github.com/hashicorp/nomad)
-- [ETCD 简介 + 使用](ETCD简介使用.md)
+- [ETCD 简介 + 使用](etcd/ETCD简介使用.md)
 - [ETCD源码](https://github.com/etcd-io/etcd)
 - [ETCD使用](https://www.jianshu.com/p/2c1f56814ea5)
 - [ETCD常见问题汇总](https://blog.csdn.net/qq_35440678/article/details/80425896)
 - [ETCD命令大全](http://orchome.com/620)
 - [etcd租约](https://www.jianshu.com/p/9bd1ab83b220)
-- [ZooKeeper典型使用场景一览](ZooKeeper典型使用场景一览.md)
+- [ZooKeeper典型使用场景一览](ZooKeeper/ZooKeeper典型使用场景一览.md)
 - [分布式id解决方案](https://blog.csdn.net/u013332124/article/details/81234125)
 - hadoop
 - spark
