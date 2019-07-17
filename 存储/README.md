@@ -13,15 +13,16 @@
 
 ### Redis
 
-- [Redis主从复制(2019-04-27)](Redis主从复制.md)
-- [Redis RDB持久化(2019-04-27)](RedisRDB持久化.md)
-- [内存回收机制](内存回收机制.md)
+- [Redis主从复制(2019-04-27)](Redis/Redis主从复制.md)
+- [Redis RDB持久化(2019-04-27)](Redis/RedisRDB持久化.md)
+- [内存回收机制](Redis/内存回收机制.md)
 - 数据结构实现方式
 - 事务
 - 集群方案
 - LRU
 - [Redis集群方案比较](https://my.oschina.net/xiaominmin/blog/1618740)
-- [这可能是目前最全的Redis高可用技术解决方案](这可能是目前最全的Redis高可用技术解决方案.md)
+- [这可能是目前最全的Redis高可用技术解决方案](Redis/Redis高可用技术解决方案.md)
+- [Redis发展趋势展望](Redis/Redis发展趋势展望.md)
 
 ### MongoDB
 
