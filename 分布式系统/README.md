@@ -1,5 +1,9 @@
 # 分布式系统
 
+## 概述
+
+- [分布式系统难点](https://cfyme.iteye.com/blog/2209297)
+
 ## 分布式事务
 
 - [浅谈事务与一致性问题](https://www.jianshu.com/p/f0a1b00a6002)
@@ -12,6 +16,7 @@ DataConsistency		数据一致性
 
 - [Consistency model](https://en.wikipedia.org/wiki/Consistency_model)
 - [辨析三种一致](https://www.2cto.com/net/201806/755476.html)
+- [vector clock向量时钟算法简介](https://blog.csdn.net/hellochenlu/article/details/53264544)
 
 ## 最终一致性
 
