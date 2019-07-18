@@ -23,6 +23,9 @@
 - [Redis集群方案比较](https://my.oschina.net/xiaominmin/blog/1618740)
 - [这可能是目前最全的Redis高可用技术解决方案](Redis/Redis高可用技术解决方案.md)
 - [Redis发展趋势展望](Redis/Redis发展趋势展望.md)
+- [Redis技巧:分片技术和Hash Tag](https://www.jianshu.com/p/c441b882c1c6)
+- [redis（6）--redis集群之分片机制（redis-cluster）](https://www.cnblogs.com/flgb/p/10810269.html)
+- [redis架构演变与redis-cluster群集读写方案](https://my.oschina.net/u/2600078/blog/1923696)
 
 ### MongoDB
 
