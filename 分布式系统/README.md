@@ -10,7 +10,7 @@
 
 ## 一致性模型
 
-- [Consistency model](https://en.wikipedia.org/wiki/Consistency_model)
+- [Consistency model](一致性模型.md)
 - [内存一致性模型](http://www.wowotech.net/memory_management/456.html)
 - [辨析三种一致](https://www.2cto.com/net/201806/755476.html)
 - [vector clock向量时钟算法简介](https://blog.csdn.net/hellochenlu/article/details/53264544)
