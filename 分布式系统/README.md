@@ -4,6 +4,10 @@
 
 - [分布式系统难点](https://cfyme.iteye.com/blog/2209297)
 
+## 同步
+
+- [分布式系统时间和全局状态](http://blog.sina.com.cn/s/blog_635675db0102v317.html)
+
 ## 分布式事务
 
 - [浅谈事务与一致性问题](https://www.jianshu.com/p/f0a1b00a6002)
@@ -15,12 +19,16 @@
 - [内存一致性模型](http://www.wowotech.net/memory_management/456.html)
 - [辨析三种一致](https://www.2cto.com/net/201806/755476.html)
 - [vector clock向量时钟算法简介](https://blog.csdn.net/hellochenlu/article/details/53264544)
-- 最终一致性(交换律，结合律，幂等律)
-- [Conflict-Free Replicated Data Types](https://hal.inria.fr/file/index/docid/555588/filename/techreport.pdf)
+
+## 一致性协议
+
+### 最终一致性
+
+最终一致性(交换律，结合律，幂等律)
+
 - [CRDT——解决最终一致问题的利器](https://yq.aliyun.com/articles/635632?utm_content=m_1000015503)
 - [谈谈CRDT](http://liyu1981.github.io/what-is-CRDT/)
 
-## 一致性协议
 
 ## 强一致性
 

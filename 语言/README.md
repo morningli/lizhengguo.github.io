@@ -3,6 +3,7 @@
 ## c++
 
 - 多态实现方式
+- [C++/C++11中变长参数的使用](https://blog.csdn.net/fengbingchun/article/details/78483471)
 
 ## golang
 
@@ -16,4 +17,8 @@
 
 ## python
 
-- []
+## rust
+
+## perl
+
+## lua
