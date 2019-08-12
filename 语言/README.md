@@ -1,5 +1,9 @@
 # 语言
 
+## 编译
+
+- [C/C++ 跨平台交叉编译、静态库/动态库编译、MinGW、Cygwin、CodeBlocks使用原理及链接参数选项](https://www.cnblogs.com/LittleHann/p/3980364.html)
+
 ## c++
 
 - 多态实现方式
