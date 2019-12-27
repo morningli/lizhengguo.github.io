@@ -45,3 +45,5 @@
 ### Bucardo
 
 ### CounchDB
+
+### Riak2.0
