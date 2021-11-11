@@ -41,3 +41,4 @@
 ## 分布式事务
 
 - [2PC和3PC中故障情况分析](https://blog.csdn.net/lnho2015/article/details/78685503)
+- [星巴克不使用两阶段提交](https://cloud.tencent.com/developer/article/1744359)
