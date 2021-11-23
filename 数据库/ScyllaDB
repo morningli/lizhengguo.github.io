@@ -1,0 +1,5 @@
+IO调度
+https://scylladb.medium.com/taming-the-beast-how-scylla-leverages-control-theory-to-keep-compactions-under-control-881389168a67
+https://www.scylladb.com/2016/04/14/io-scheduler-1/
+https://www.scylladb.com/2016/04/29/io-scheduler-2/
+https://www.scylladb.com/2018/04/19/scylla-i-o-scheduler-3/
